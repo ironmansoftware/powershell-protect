@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <Rules>
+    <Rule>
+        <Conditions>
+            <Condition>
+                <Property>AmsiBypass</Property>
+            </Condition>
+        </Conditions>
+        <Actions>
+            <ActionRef>
+                <Name>Block</Name>
+            </ActionRef>
+        </Actions>
+    </Rule>
+  </Rules>
+  <Actions>
+    <Action>
+      <Name>Block</Name>
+      <Type>Block</Type>
+    </Action>
+  </Actions>
+</Configuration>

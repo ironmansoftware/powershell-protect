@@ -1,0 +1,20 @@
+name: Production
+on: [workflow_dispatch]
+
+jobs:
+    build:
+      name: Build
+      runs-on: windows-latest
+      steps:
+        - name: Build
+          run: Install-Module InvokeBuild -Scope CurrentUser -Force
+          shell: powershell
+        - uses: actions/checkout@v1
+        - name: Build
+          run: Invoke-Build
+          shell: powershell
+        - name: Publish
+          run: Invoke-Build -Task Publish
+          shell: powershell
+          env:
+            PowerShellGalleryKey: ${{ secrets.POWERSHELLGALLERYKEY }}

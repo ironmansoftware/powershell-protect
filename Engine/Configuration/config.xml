@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <Rules>
+  </Rules>
+  <Actions>
+    <Action>
+      <Name>File</Name>
+      <Type>File</Type>
+      <Settings>
+        <Setting>
+          <Name>Path</Name>
+          <Value>%temp%\test.txt</Value>
+        </Setting>
+        <Setting>
+          <Name>Format</Name>
+          <Value>{applicationName},{rule}</Value>
+        </Setting>
+      </Settings>
+    </Action>
+    <Action>
+      <Name>Block</Name>
+      <Type>Block</Type>
+    </Action>
+  </Actions>
+</Configuration>
