@@ -1,7 +1,5 @@
 # PowerShell Protect
 
-<img src="https://github.com/ironmansoftware/powershell-protect/raw/master/icon.png" width="200" height="200" />
-
 Configurable [anti-malware scan interface](https://docs.microsoft.com/en-us/windows/win32/amsi/antimalware-scan-interface-portal) provider.
 
 PowerShell Protect can be used to block and audit scripts within PowerShell. You can use the configurable system to determine what to do when a script is executed by any PowerShell host.
