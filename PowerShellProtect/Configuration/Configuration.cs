@@ -7,8 +7,7 @@ namespace Engine.Configuration
     {
         public List<Rule> Rules { get; set; } = new List<Rule>();
         public List<Action> Actions { get; set; } = new List<Action>();
-        public BuiltIn BuiltIn { get; set;  } = new BuiltIn();
-        public string License { get; set; }
+        public BuiltIn BuiltIn { get; set; } = new BuiltIn();
     }
 
     public class BuiltIn
@@ -55,5 +54,5 @@ namespace Engine.Configuration
         public string Name { get; set; }
         public string Value { get; set; }
     }
-        
+
 }

@@ -18,11 +18,9 @@ namespace PowerShellProtect.Cmdlets
 
         [Parameter]
         public SwitchParameter DisableBuiltInActions { get; set; }
-        
+
         [Parameter]
         public string[] DisabledBuiltInConditions { get; set; } = new string[0];
-        [Parameter]
-        public string License { get; set; }
 
         protected override void EndProcessing()
         {
@@ -30,11 +28,10 @@ namespace PowerShellProtect.Cmdlets
             {
                 Actions = Action?.ToList(),
                 Rules = Rule?.ToList(),
-                License = License,
                 BuiltIn = new BuiltIn
                 {
                     DisabledConditions = DisabledBuiltInConditions,
-                    Actions = Action?.Select(m => new ActionRef {  Name = m.Name }).ToList(),
+                    Actions = Action?.Select(m => new ActionRef { Name = m.Name }).ToList(),
                     Enabled = !DisableBuiltInActions.IsPresent
                 }
             };

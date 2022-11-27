@@ -12,7 +12,7 @@
     RootModule        = 'PowerShellProtect.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '2022.9.0'
+    ModuleVersion     = '2022.11.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -24,7 +24,7 @@
     Author            = 'Ironman Software'
 
     # Company or vendor of this module
-    CompanyName       = 'Ironman Software'
+    CompanyName       = 'Adam Driscoll'
 
     # Copyright statement for this module
     Copyright         = '(c) Ironman Software. All rights reserved.'
@@ -95,19 +95,19 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags         = @('AMSI', 'security', 'audit')
+            Tags       = @('AMSI', 'security', 'audit')
 
             # A URL to the license for this module.
-            LicenseUri   = 'https://ironmansoftware.com/legal'
+            LicenseUri = 'https://github.com/ironmansoftware/powershell-protect/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri   = 'https://docs.poshtools.com/powershell-pro-tools-documentation/powershell-protect'
+            ProjectUri = 'https://github.com/ironmansoftware/powershell-protect'
 
             # A URL to an icon representing this module.
-            IconUri      = 'https://www.powershellprotect.com/assets/img/icon.png'
+            IconUri    = 'https://raw.githubusercontent.com/ironmansoftware/powershell-protect/main/icon.png'
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'https://docs.poshtools.com/powershell-protect'
+            # ReleaseNotes = 'https://docs.poshtools.com/powershell-protect'
 
             # Prerelease string of this module
             # Prerelease = ''
