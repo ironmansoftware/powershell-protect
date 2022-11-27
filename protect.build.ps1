@@ -16,13 +16,6 @@ task Build {
     Copy-Item "$PSScriptRoot\Engine\bin\Release\net462\x64\Engine.dll" "$Output\x64"
     Copy-Item "$PSScriptRoot\x64\Release\AmsiProvider.dll" "$Output\x64"
     Copy-Item "$PSScriptRoot\Engine\bin\Release\net462\*.dll" "$Output"
-    
-    Push-Location "$Output"
-    Start-Process "$PSScriptRoot\PowerShellProtect\Obfuscar.Console.exe" -ArgumentList "$PSScriptRoot\PowerShellProtect\obfuscar.xml" -Wait -NoNewWindow
-    Remove-Item "$Output\PowerShellProtect.dll" -Force
-    Move-Item "$Output\obfuscated\PowerShellProtect.dll" "$Output\PowerShellProtect.dll" 
-    Remove-Item "$Output\obfuscated" -Recurse
-    Pop-Location
 
     & $path .\AmsiProvider.sln /p:Configuration=Release /p:Platform=x86
 
