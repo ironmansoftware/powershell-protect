@@ -12,7 +12,7 @@ namespace PowerShellProtect.Cmdlets
     public class NewAIConditionCommand : PSCmdlet
     {
         [Parameter(Mandatory = true)]
-        [ValidateSet("isBestPractice", "isSuspicious", "isSafe")]
+        [ValidateSet("isBestPractice", "isSuspicious")]
         public string Property { get; set; }
 
         [Parameter(Mandatory = true)]
@@ -36,7 +36,7 @@ namespace PowerShellProtect.Cmdlets
 
         protected override void EndProcessing()
         {
-            var condition = new AICondition
+            var condition = new Condition
             {
                 Property = Property,
                 AITemperature = AITemperature,

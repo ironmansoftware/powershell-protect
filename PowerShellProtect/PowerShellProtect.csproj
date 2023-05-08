@@ -10,6 +10,7 @@
     <PackageReference Include="PowerShellStandard.Library" Version="3.0.0-preview-01" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="4.7.0" />
     <PackageReference Include="System.Management" Version="4.7.0" />
+    <PackageReference Include="openai" Version="1.7.2" />
   </ItemGroup>
 
 </Project>

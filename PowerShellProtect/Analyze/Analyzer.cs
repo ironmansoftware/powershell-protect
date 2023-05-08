@@ -45,6 +45,8 @@ namespace Engine
                 new VariableCondition(),
                 new MemberCondition(),
                 new ScriptStringCondition(),
+                new AIisBestPracticeCondition(),
+                new AIisSuspiciousCondition()
             }.ToDictionary(m => m.Name.ToLower(), m => m);
 
             _builtInConditions = new List<ICondition>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>OkGoDoIt (Roger Pincombe)</dc:creator>
+  <dc:description>A simple C# / .NET library to use with OpenAI's GPT-3 API, as well as ChatGPT, GPT-4, DALL·E, etc.  Independently developed, this is not an official library and I am not affiliated with OpenAI.  An OpenAI or Azure OpenAI account is required.</dc:description>
+  <dc:identifier>OpenAI</dc:identifier>
+  <version>1.7.2</version>
+  <keywords>OpenAI, AI, ML, API, ChatGPT, DALLE, GPT3, GPT-3, GPT4, GPT-4, DALL-E</keywords>
+  <lastModifiedBy>NuGet.Build.Tasks.Pack, Version=6.5.0.136, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 10.0.19044.0;.NET Framework 4.7.2</lastModifiedBy>
+</coreProperties>
