@@ -16,6 +16,7 @@ namespace PowerShellProtect.Analyze.Conditions
         {
 
             string xmlResponse;
+            XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
 
             var api = new OpenAI_API.OpenAI_API(condition.APIKey.ToInsecureString());
 
@@ -23,15 +24,32 @@ namespace PowerShellProtect.Analyze.Conditions
                 .AppendLine(Engine.Configuration.OpenAIConfiguration.chatMessagePowerShellSecurity)
                 .AppendLine(context.Script);
 
+
             var chat = api.Chat.CreateConverstation();
             chat.AppendSystemMessage(Engine.Configuration.OpenAIConfiguration.chatRolePowerShellSecurity);
             chat.AppendUserInput(UserMessage.ToString());
-            string response = await chat.GetResponseFromChatbotAsync();
 
-            xmlResponse = response;
-
-            if (xmlResponse.rating >= condition.AIRating) return true;
-            return false;
+            OpenAIResponse xmlResponse = null;
+            StringReader reader = null;
+            
+            try
+            {
+                string response = await chat.GetResponseFromChatbotAsync();
+                reader = new StringReader(response);
+                XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
+                xmlResponse = (OpenAIResponse)serializer.Deserialize(reader);
+            }
+            catch(Exception ex)
+            {
+                if (!condition.ContinueOnError) return false;
+            }
+            finally
+            {
+                reader?.Close();
+            }
+            
+            if (xmlResponse != null && xmlResponse.rating >= condition.AIRating) return true;
+            return false;            
 
         }
 
