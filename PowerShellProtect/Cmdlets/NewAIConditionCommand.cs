@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Management.Automation;
 using System.Security.SecureString;
+using System.SecureStringExtensions;
 using System.Text;
 
 namespace PowerShellProtect.Cmdlets
@@ -40,7 +41,7 @@ namespace PowerShellProtect.Cmdlets
                 Property = Property,
                 AITemperature = AITemperature,
                 AIRating = AIRating,
-                APIKey = APIKey to base64string,
+                APIKey = SecureStringExtensions.ToBase64(APIKey),
                 ContinueOnError = ContinueOnError
             };
 
