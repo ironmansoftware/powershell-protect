@@ -32,6 +32,13 @@ namespace Engine.Configuration
         public string Value { get; set; }
     }
 
+    public class AICondition
+    {
+        public string Property { get; set; }
+        public string Operator { get; set; }
+        public string Value { get; set; }
+    }
+
     public class ActionRef
     {
         public string Name { get; set; }
