@@ -13,7 +13,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "An AMSI bypass is used to circumvent malware scanning for scripts run in PowerShell. Learn more: https://blog.ironmansoftware.com/protect-amsi-bypass/";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             if (context?.Strings == null) return false;
             if (

@@ -14,7 +14,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "There was an attempt to define a dynamic assembly in memory using the System.Reflection.Emit namespace.";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             if (context?.Ast == null) return false;
             return context.Ast.FindAll(m => m is MemberExpressionAst ast && ast.Member.ToString().Equals("DefineDynamicAssembly", StringComparison.OrdinalIgnoreCase), true).Any() ||

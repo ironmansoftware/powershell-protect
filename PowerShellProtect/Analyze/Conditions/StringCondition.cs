@@ -12,7 +12,7 @@ namespace Engine.Analyze.Conditions
 
         public abstract string GetValue(ScriptContext context);
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             var value = GetValue(context);
 

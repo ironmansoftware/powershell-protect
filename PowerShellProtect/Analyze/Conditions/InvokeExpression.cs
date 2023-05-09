@@ -11,7 +11,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "Invoke-Expression is often used to execute malicious payloads downloaded from the internet.";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             if (context?.Commands == null) return false;
 

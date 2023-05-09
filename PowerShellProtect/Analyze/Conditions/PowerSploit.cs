@@ -13,7 +13,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "There was an attempt to run a PowerSploit command. Learn more about PowerSploit: https://github.com/PowerShellMafia/PowerSploit";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             var commands = new[]
             {

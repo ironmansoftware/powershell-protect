@@ -12,7 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "There was an attempt to run a Kerberoasting script. Learn more about Kerberoasting: https://github.com/EmpireProject/Empire/blob/master/data/module_source/credentials/Invoke-Kerberoast.ps1";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             var script = context.Script.ToLower();
 

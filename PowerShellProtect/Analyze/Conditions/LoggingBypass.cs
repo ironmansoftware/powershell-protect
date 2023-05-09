@@ -11,7 +11,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "A logging bypass disables PowerShell module and script block logging. Learn more: https://blog.ironmansoftware.com/protect-logging-bypass/";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             if (context?.Script == null) return false;
             if (context?.Commands == null) return false;

@@ -12,7 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "There was an attempt to create a persistent WMI event subscription.";
 
-        public bool Analyze(ScriptContext context, Condition condition)
+        public bool AnalyzeAsync(ScriptContext context, Condition condition)
         {
             var script = context.Script.ToLower();
 
