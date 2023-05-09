@@ -32,7 +32,7 @@ namespace PowerShellProtect.Analyze
             }
         }
 
-        public static secureString ToSecureString(this string base64String)
+        public static SecureString ToSecureString(this string base64String)
         {
             // Decode the Base64 string as a byte array, and then decode the byte array as a Unicode char array.
             byte[] bytes = Convert.FromBase64String(base64String);
