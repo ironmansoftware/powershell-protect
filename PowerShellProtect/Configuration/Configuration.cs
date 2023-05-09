@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.SecureString;
+using System.Security;
 
 namespace Engine.Configuration
 {

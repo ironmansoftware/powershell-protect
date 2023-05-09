@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Management.Automation;
-using System.Security.SecureString;
-using System.SecureStringExtensions;
+using System.Security;
+using PowerShellProtect.Analyze;
 using System.Text;
 
 namespace PowerShellProtect.Cmdlets
@@ -29,9 +29,8 @@ namespace PowerShellProtect.Cmdlets
         [Alias("API")]
         public SecureString APIKey { get; set; }   
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory = false)]
         [Alias("Bypass")]
-        [ValidateRange(-1, 1)]
         public SwitchParameter ContinueOnError { get; set; } 
 
         protected override void EndProcessing()
