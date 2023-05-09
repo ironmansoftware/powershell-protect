@@ -22,12 +22,12 @@ namespace PowerShellProtect.Cmdlets
 
         [Parameter(Mandatory = true)]
         [Alias("Rate")]
-        [ValidateRange(-1, 1)]
-        public string AIRating { get; set; }    
+        [ValidateRange(0, 1)]
+        public decimal AIRating { get; set; }    
 
         [Parameter(Mandatory = true)]
         [Alias("API")]
-        public SecureString APIKey { get; set; }   
+        public string APIKey { get; set; }   
 
         [Parameter(Mandatory = false)]
         [Alias("Bypass")]
@@ -40,7 +40,7 @@ namespace PowerShellProtect.Cmdlets
                 Property = Property,
                 AITemperature = AITemperature,
                 AIRating = AIRating,
-                APIKey = SecureStringExtensions.ToBase64(APIKey),
+                APIKey = APIKey,
                 ContinueOnError = ContinueOnError
             };
 

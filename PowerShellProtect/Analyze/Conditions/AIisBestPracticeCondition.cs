@@ -6,6 +6,7 @@ using System.Text;
 using OpenAI_API;
 using System.Xml.Serialization;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace PowerShellProtect.Analyze.Conditions
 {
@@ -17,16 +18,21 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public bool Analyze(ScriptContext context, Condition condition)
         {
+            return this.AnalyzeAsync(context, condition).Result;
+        }
 
-            string xmlResponse;
+        public async Task<bool> AnalyzeAsync(ScriptContext context, Condition condition)
+        {
 
-            var api = new OpenAI_API.OpenAI_API(condition.APIKey.ToInsecureString());
+            XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
 
-            string UserMessage = new StringBuilder()
+            var api = new OpenAI_API.OpenAIAPI(condition.APIKey);
+
+            StringBuilder UserMessage = new StringBuilder()
                 .AppendLine(Engine.Configuration.OpenAIConfiguration.chatMessagePowerShellBestPractice)
                 .AppendLine(context.Script);
 
-            var chat = api.Chat.CreateConverstation();
+            var chat = api.Chat.CreateConversation();
             chat.AppendSystemMessage(Engine.Configuration.OpenAIConfiguration.chatRolePowerShellBestPractice);
             chat.AppendUserInput(UserMessage.ToString());
 
@@ -37,7 +43,7 @@ namespace PowerShellProtect.Analyze.Conditions
             {
                 string response = await chat.GetResponseFromChatbotAsync();
                 reader = new StringReader(response);
-                XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
+                
                 xmlResponse = (OpenAIResponse)serializer.Deserialize(reader);
             }
             catch(Exception ex)

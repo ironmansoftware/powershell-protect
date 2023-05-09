@@ -3,10 +3,14 @@ using Engine.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenAI_API;
+using System.Xml.Serialization;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace PowerShellProtect.Analyze.Conditions
 {
-    public class AIObfuscationCondition : ICondition
+    public class AIisSuspiciousCondition : ICondition
     {
         public string Name => "AIisSuspiciousCondition";
 
@@ -14,18 +18,21 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public bool Analyze(ScriptContext context, Condition condition)
         {
+            return this.AnalyzeAsync(context, condition).Result;
+        }
 
-            string xmlResponse;
+        private async Task<bool> AnalyzeAsync(ScriptContext context, Condition condition)
+        {
+
             XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
 
-            var api = new OpenAI_API.OpenAI_API(condition.APIKey.ToInsecureString());
+            var api = new OpenAI_API.OpenAIAPI(condition.APIKey);
 
-            string UserMessage = new StringBuilder()
+            StringBuilder UserMessage = new StringBuilder()
                 .AppendLine(Engine.Configuration.OpenAIConfiguration.chatMessagePowerShellSecurity)
-                .AppendLine(context.Script);
+                .AppendLine(context.Script.ToString());
 
-
-            var chat = api.Chat.CreateConverstation();
+            var chat = api.Chat.CreateConversation();
             chat.AppendSystemMessage(Engine.Configuration.OpenAIConfiguration.chatRolePowerShellSecurity);
             chat.AppendUserInput(UserMessage.ToString());
 
@@ -36,10 +43,9 @@ namespace PowerShellProtect.Analyze.Conditions
             {
                 string response = await chat.GetResponseFromChatbotAsync();
                 reader = new StringReader(response);
-                XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
                 xmlResponse = (OpenAIResponse)serializer.Deserialize(reader);
             }
-            catch(Exception ex)
+            catch
             {
                 if (!condition.ContinueOnError) return false;
             }
