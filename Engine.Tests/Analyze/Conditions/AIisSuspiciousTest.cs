@@ -14,7 +14,7 @@ namespace PowerShellProtect.Analyze.Conditions.Tests
     public class AIisSuspiciousConditionTests
     {
         [Fact]
-        public void AnalyzeAsync_ReturnsTrue_WhenOpenAIResponseRatingIsGreaterThanOrEqualToConditionAIRating()
+        public void Analyze_ReturnsTrue_WhenOpenAIResponseRatingIsGreaterThanOrEqualToConditionAIRating()
         {
             // Arrange
             var context = new ScriptContext();
@@ -33,7 +33,7 @@ namespace PowerShellProtect.Analyze.Conditions.Tests
         }
 
         [Fact]
-        public void AnalyzeAsync_ReturnsFalse_WhenOpenAIResponseIsNull()
+        public void Analyze_ReturnsFalse_WhenOpenAIResponseIsNull()
         {
             // Arrange
             var context = new ScriptContext();
