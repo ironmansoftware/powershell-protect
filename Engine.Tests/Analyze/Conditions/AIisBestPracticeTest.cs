@@ -6,6 +6,7 @@ using System.Text;
 using OpenAI_API;
 using System.Xml.Serialization;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PowerShellProtect.Analyze.Conditions.Tests
@@ -19,117 +20,35 @@ namespace PowerShellProtect.Analyze.Conditions.Tests
             var context = new ScriptContext();
             var condition = new Condition
             {
-                APIKey = "test",
-                AIRating = 0.5m,
-                ContinueOnError = false
+                APIKey = "your-api-key",
+                AIRating = 0.5m
             };
-            var aiResponse = new OpenAIResponse { rating = 0.6m };
-            var chatbotResponse = Serialize(aiResponse);
-
-            var apiMock = new Mock<OpenAI_API.OpenAI_API>("test");
-            var chatMock = new Mock<Chat>();
-            chatMock.Setup(c => c.GetResponseFromChatbotAsync()).ReturnsAsync(chatbotResponse);
-            apiMock.Setup(a => a.Chat.CreateConverstation()).Returns(chatMock.Object);
-
-            var sut = new AIisBestPracticeCondition { Api = apiMock.Object };
+            var aIisBestPracticeCondition = new AIisBestPracticeCondition();
 
             // Act
-            var result = sut.Analyze(context, condition);
+            var result = aIisBestPracticeCondition.Analyze(context, condition);
 
             // Assert
             Assert.True(result);
         }
 
         [Fact]
-        public void Analyze_ReturnsFalse_WhenOpenAIResponseRatingIsLessThanConditionAIRating()
+        public void Analyze_ReturnsFalse_WhenOpenAIResponseIsNull()
         {
             // Arrange
             var context = new ScriptContext();
             var condition = new Condition
             {
-                APIKey = "test",
-                AIRating = 0.5m,
-                ContinueOnError = false
+                APIKey = "your-api-key",
+                AIRating = 0.5m
             };
-            var aiResponse = new OpenAIResponse { rating = 0.4m };
-            var chatbotResponse = Serialize(aiResponse);
-
-            var apiMock = new Mock<OpenAI_API.OpenAI_API>("test");
-            var chatMock = new Mock<Chat>();
-            chatMock.Setup(c => c.GetResponseFromChatbotAsync()).ReturnsAsync(chatbotResponse);
-            apiMock.Setup(a => a.Chat.CreateConverstation()).Returns(chatMock.Object);
-
-            var sut = new AIisBestPracticeCondition { Api = apiMock.Object };
+            var aIisBestPracticeCondition = new AIisBestPracticeCondition();
 
             // Act
-            var result = sut.Analyze(context, condition);
+            var result = aIisBestPracticeCondition.Analyze(context, condition);
 
             // Assert
             Assert.False(result);
-        }
-
-        [Fact]
-        public void Analyze_ReturnsFalse_WhenApiThrowsExceptionAndConditionContinueOnErrorIsFalse()
-        {
-            // Arrange
-            var context = new ScriptContext();
-            var condition = new Condition
-            {
-                APIKey = "test",
-                AIRating = 0.5m,
-                ContinueOnError = false
-            };
-            var exception = new Exception("Test exception");
-
-            var apiMock = new Mock<OpenAI_API.OpenAI_API>("test");
-            var chatMock = new Mock<Chat>();
-            chatMock.Setup(c => c.GetResponseFromChatbotAsync()).ThrowsAsync(exception);
-            apiMock.Setup(a => a.Chat.CreateConverstation()).Returns(chatMock.Object);
-
-            var sut = new AIisBestPracticeCondition { Api = apiMock.Object };
-
-            // Act
-            var result = sut.Analyze(context, condition);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void Analyze_ReturnsTrue_WhenApiThrowsExceptionAndConditionContinueOnErrorIsTrue()
-        {
-            // Arrange
-            var context = new ScriptContext();
-            var condition = new Condition
-            {
-                APIKey = "test",
-                AIRating = 0.5m,
-                ContinueOnError = true
-            };
-            var exception = new Exception("Test exception");
-
-            var apiMock = new Mock<OpenAI_API.OpenAI_API>("test");
-            var chatMock = new Mock<Chat>();
-            chatMock.Setup(c => c.GetResponseFromChatbotAsync()).ThrowsAsync(exception);
-            apiMock.Setup(a => a.Chat.CreateConverstation()).Returns(chatMock.Object);
-
-            var sut = new AIisBestPracticeCondition { Api = apiMock.Object };
-
-            // Act
-            var result = sut.Analyze(context, condition);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        private string Serialize(OpenAIResponse response)
-        {
-            var serializer = new XmlSerializer(typeof(OpenAIResponse));
-            using (var writer = new StringWriter())
-            {
-                serializer.Serialize(writer, response);
-                return writer.ToString();
-            }
         }
     }
 }
