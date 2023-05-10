@@ -12,7 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "A string containing the CVE-2021-44228 Log4j exploit was found within the script.";
 
-        public bool AnalyzeAsync(ScriptContext context, Condition condition)
+        public bool Analyze(ScriptContext context, Condition condition)
         {
             if (context?.Script == null) return false;
 

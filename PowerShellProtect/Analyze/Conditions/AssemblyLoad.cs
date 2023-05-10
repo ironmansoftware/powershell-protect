@@ -15,7 +15,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "An attempt was made to load an assembly from memory.";
 
-        public bool AnalyzeAsync(ScriptContext context, Condition condition)
+        public bool Analyze(ScriptContext context, Condition condition)
         {
             if (context?.Ast == null) return false;
             var memberExpressions = context.Ast.FindAll(m => m is MemberExpressionAst, true).Cast<MemberExpressionAst>().Where(m => m.Member.ToString().Equals("load", StringComparison.OrdinalIgnoreCase));

@@ -12,7 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "There was an attempt to run the BloudHound injestor. Learn more about the injestor: https://github.com/BloodHoundAD/SharpHound3";
 
-        public bool AnalyzeAsync(ScriptContext context, Condition condition)
+        public bool Analyze(ScriptContext context, Condition condition)
         {
             var script = context.Script.ToLower();
 

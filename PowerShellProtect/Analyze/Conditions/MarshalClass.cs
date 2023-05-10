@@ -14,7 +14,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public string Description => "An attempt was made to use the Marshal class. The Marshal class is for working with unmanaged memory.";
 
-        public bool AnalyzeAsync(ScriptContext context, Condition condition)
+        public bool Analyze(ScriptContext context, Condition condition)
         {
             if (context?.Ast == null) return false;
             return context.Ast.FindAll(m => m is TypeExpressionAst ast && ast.TypeName.FullName.ToLower().Contains("marshal"), true).Any();

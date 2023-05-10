@@ -91,7 +91,7 @@ namespace Engine
                 {
                     try
                     {
-                        var result = condition.AnalyzeAsync(scriptContext, null);
+                        var result = condition.Analyze(scriptContext, null);
                         if (result)
                         {
                             Log.LogError($"PowerShell Protect blocked a script from running due to a violation of the {condition.Name} rule. {condition.Description}", 101);
@@ -121,7 +121,7 @@ namespace Engine
                     }
 
                     var c = _conditions[condition.Property.ToLower()];
-                    var result = c.AnalyzeAsync(scriptContext, condition);
+                    var result = c.Analyze(scriptContext, condition);
                     if (result && rule.AnyCondition)
                     {
                         match = true;
