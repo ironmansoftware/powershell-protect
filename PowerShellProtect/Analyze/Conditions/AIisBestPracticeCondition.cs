@@ -12,7 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 {
     public class AIisBestPracticeCondition : ICondition
     {
-        public string Name => "AIisBestPractice";
+        public string Name => "isBestPractice";
 
         public string Description => "AI security best practices must be followed by scripts that are executed.";
 

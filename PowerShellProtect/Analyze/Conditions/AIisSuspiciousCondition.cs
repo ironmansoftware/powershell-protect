@@ -12,7 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 {
     public class AIisSuspiciousCondition : ICondition
     {
-        public string Name => "AIisSuspiciousCondition";
+        public string Name => "isSuspicious";
 
         public string Description => "The AI considers it suspicious.";
 
