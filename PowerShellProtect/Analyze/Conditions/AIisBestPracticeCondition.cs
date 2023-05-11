@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenAI_API;
-using System.Xml.Serialization;
 using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PowerShellProtect.Analyze.Conditions
 {
@@ -24,39 +24,31 @@ namespace PowerShellProtect.Analyze.Conditions
         public async Task<bool> AnalyzeAsync(ScriptContext context, Condition condition)
         {
 
-            XmlSerializer serializer = new XmlSerializer(typeof(OpenAIResponse));
-
+            OpenAIResponse aIResponse = null;
             var api = new OpenAI_API.OpenAIAPI(condition.APIKey);
+            var serializer = new JsonSerializer();
 
             StringBuilder UserMessage = new StringBuilder()
                 .AppendLine(Engine.Configuration.OpenAIConfiguration.chatMessagePowerShellBestPractice)
+                .AppendLine("The PowerShell Script:")
                 .AppendLine(context.Script);
 
             var chat = api.Chat.CreateConversation();
             chat.AppendSystemMessage(Engine.Configuration.OpenAIConfiguration.chatRolePowerShellBestPractice);
-            chat.AppendUserInput(UserMessage.ToString());
-
-            OpenAIResponse xmlResponse = null;
-            StringReader reader = null;
+            chat.AppendUserInput(UserMessage.ToString());           
             
             try
             {
                 string response = await chat.GetResponseFromChatbotAsync();
-                reader = new StringReader(response);
-                
-                xmlResponse = (OpenAIResponse)serializer.Deserialize(reader);
+                aIResponse = JsonConvert.DeserializeObject<OpenAIResponse>(response);
             }
             catch(Exception ex)
             {
-                if (!condition.ContinueOnError) return false;
-            }
-            finally
-            {
-                reader?.Close();
+                if (!condition.ContinueOnError) return true;
             }
             
-            if (xmlResponse != null && xmlResponse.rating >= condition.AIRating) return true;
-            return false;  
+            if (aIResponse != null && aIResponse.rating >= condition.AIRating) return false;
+            return true;  
             
         }
     }

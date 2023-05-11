@@ -14,9 +14,9 @@ namespace Engine.Configuration
 
     public class OpenAIConfiguration {
         public static readonly string chatRolePowerShellSecurity        = "You are a code analyzer. You are analyzing a PowerShell script for security vulnerabilities.";
-        public static readonly string chatRolePowerShellBestPractice    = "You are a code analyzer. You are analyzing a PowerShell script for best practices.";
-        public static readonly string chatMessagePowerShellSecurity     = "Analyze the following PowerShell Script for security vulnerabilities. Simplify the response as a boolean called 'result', provide a rating between 0 and 1 and format the response as XML.";
-        public static readonly string chatMessagePowerShellBestPractice = "Analyze the following PowerShell Script for best practices. Simplify the response as a boolean called 'result', provide a rating between 0 and 1 and format the response as XML.";
+        public static readonly string chatRolePowerShellBestPractice    = "You are a code analyzer. You are analyzing a PowerShell script for best practices. All responses are in the JSON format.";
+        public static readonly string chatMessagePowerShellSecurity     = "Analyze the following PowerShell Script for security vulnerabilities. Simplify the response as a boolean called 'result' and a decimal called 'rating' that scores the rating between 0 and 1. Format the response as JSON. Do not provide an explanation.";
+        public static readonly string chatMessagePowerShellBestPractice = "Analyze the following PowerShell Script for best practices. Simplify the response as a boolean called 'result', provide a rating between 0 and 1 and format the response as JSON.";
     }
 
     public class BuiltIn
