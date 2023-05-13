@@ -18,7 +18,7 @@ namespace PowerShellProtect.Cmdlets
         [Parameter(Mandatory = true)]
         [Alias("Temp")]
         [ValidateRange(-1, 1)]
-        public string AITemperature { get; set; }    
+        public double AITemperature { get; set; }    
 
         [Parameter(Mandatory = true)]
         [Alias("Rate")]

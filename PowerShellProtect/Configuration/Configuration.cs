@@ -15,8 +15,8 @@ namespace Engine.Configuration
     public class OpenAIConfiguration {
         public static readonly string chatRolePowerShellSecurity        = "You are a code analyzer. You are analyzing a PowerShell script for security vulnerabilities.";
         public static readonly string chatRolePowerShellBestPractice    = "You are a code analyzer. You are analyzing a PowerShell script for best practices. All responses are in the JSON format.";
-        public static readonly string chatMessagePowerShellSecurity     = "Analyze the following PowerShell Script for security vulnerabilities. Simplify the response as a boolean called 'result' and a decimal called 'rating' that scores the rating between 0 and 1. Format the response as JSON. Do not provide an explanation.";
-        public static readonly string chatMessagePowerShellBestPractice = "Analyze the following PowerShell Script for best practices. Simplify the response as a boolean called 'result', provide a rating between 0 and 1 and format the response as JSON.";
+        public static readonly string chatMessagePowerShellSecurity     = "Just the json, no explanation or usage. Analyze the following PowerShell Script for security risks. Simplify your response as a Boolean called 'result' and include a rating (scoring from bad to good) between 0 and 1. Just the json, no explanation or usage.";
+        public static readonly string chatMessagePowerShellBestPractice = "Just the json, no explanation or usage. Analyze the following PowerShell Script for best practices. Simplify your response as a Boolean called 'result' and include a rating (scoring from bad to good) between 0 and 1. Just the json, no explanation or usage.";
     }
 
     public class BuiltIn
@@ -39,7 +39,7 @@ namespace Engine.Configuration
         public string Property { get; set; }
         public string Operator { get; set; }
         public string Value { get; set; }
-        public string AITemperature { get; set; }
+        public double AITemperature { get; set; }
         public decimal AIRating { get; set; }
         public string APIKey { get; set; }
         public bool ContinueOnError { get; set; }
