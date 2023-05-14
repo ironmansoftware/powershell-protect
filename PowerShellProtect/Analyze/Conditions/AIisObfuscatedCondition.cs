@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace PowerShellProtect.Analyze.Conditions
 {
-    public class AIisBestPracticeCondition : ICondition
+    public class AIisisObfuscatedCondition : ICondition
     {
-        public string Name => "isBestPractice";
+        public string Name => "isObfuscated";
 
-        public string Description => "AI security best practices must be followed by scripts that are executed.";
+        public string Description => "Code should not be obfuscated.";
 
         public bool Analyze(ScriptContext context, Condition condition)
         {
@@ -24,9 +24,10 @@ namespace PowerShellProtect.Analyze.Conditions
             return (await OpenAIHelper.SendToOpenAI(
                 context, 
                 condition, 
-                Engine.Configuration.OpenAIConfiguration.chatMessagePowerShellBestPractice,
-                Engine.Configuration.OpenAIConfiguration.chatRolePowerShellBestPractice)
-            );                       
+                Engine.Configuration.OpenAIConfiguration.chatMessagePowerShellObfuscation,
+                Engine.Configuration.OpenAIConfiguration.chatRolePowerShellObfuscate)
+            ); 
+                      
         }
     }
 }

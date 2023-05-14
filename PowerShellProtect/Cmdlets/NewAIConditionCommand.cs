@@ -12,7 +12,7 @@ namespace PowerShellProtect.Cmdlets
     public class NewAIConditionCommand : PSCmdlet
     {
         [Parameter(Mandatory = true)]
-        [ValidateSet("isBestPractice", "isSuspicious")]
+        [ValidateSet("isBestPractice", "isSuspicious", "isObfuscated")]
         public string Property { get; set; }
 
         [Parameter(Mandatory = true)]
