@@ -16,9 +16,18 @@ namespace PowerShellProtect.Cmdlets
         public string Property { get; set; }
 
         [Parameter(Mandatory = true)]
+        [Alias("Condition")]        
+        public AIResultCondition AIResultCondition { get; set; }
+
+        [Parameter(Mandatory = true)]
         [Alias("Temp")]
         [ValidateRange(-1, 1)]
         public double AITemperature { get; set; }    
+
+        [Parameter(Mandatory = true)]
+        [Alias("Model")]
+        [ValidateRange(-1, 1)]
+        public string AIModel { get; set; }  
 
         [Parameter(Mandatory = true)]
         [Alias("Rate")]
@@ -38,10 +47,16 @@ namespace PowerShellProtect.Cmdlets
             var condition = new Condition
             {
                 Property = Property,
-                AITemperature = AITemperature,
-                AIRating = AIRating,
-                APIKey = APIKey,
-                ContinueOnError = ContinueOnError
+                AISettings = new aISettings
+                {
+                    resultCondition = AIResultCondition,
+                    Temperature = AITemperature,
+                    Rating = AIRating,
+                    APIKey = APIKey,
+                    ContinueOnError = ContinueOnError,
+                    Model = AIModel
+                }
+
             };
 
             WriteObject(condition);
