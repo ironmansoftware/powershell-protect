@@ -1,4 +1,5 @@
 ﻿using Engine.Configuration;
+using PowerShellProtect.Analyze;
 using System;
 using System.Collections.Generic;
 using System.Management.Automation;
@@ -42,6 +43,14 @@ namespace PowerShellProtect.Cmdlets
         [Parameter(Mandatory = true, ParameterSetName = "Matches")]
         public SwitchParameter Matches { get; set; }
 
+        [Parameter(Mandatory = true, ParameterSetName = "AI")]
+        [Parameter(Mandatory = false)]
+        [Alias("Result")]
+        public AIResultCondition resultCondition { get; set; } 
+
+        [Parameter(Mandatory = true, ParameterSetName = "AI")]
+        [Parameter(Mandatory = false)]
+        public aISettings AIConfiguration { get; set; }
 
         [Parameter(Mandatory = true)]
         public string Value { get; set; }
@@ -53,6 +62,11 @@ namespace PowerShellProtect.Cmdlets
                 Property = Property,
                 Value = Value
             };
+
+            if (AIConfiguration != null)
+            {
+                condition.AISettings = AIConfiguration;
+            }
 
             if (Equals)
             {

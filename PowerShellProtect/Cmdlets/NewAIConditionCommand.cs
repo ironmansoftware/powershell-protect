@@ -16,48 +16,28 @@ namespace PowerShellProtect.Cmdlets
         public string Property { get; set; }
 
         [Parameter(Mandatory = true)]
-        [Alias("Condition")]        
-        public AIResultCondition AIResultCondition { get; set; }
-
-        [Parameter(Mandatory = true)]
-        [Alias("Temp")]
-        [ValidateRange(-1, 1)]
-        public double AITemperature { get; set; }    
-
-        [Parameter(Mandatory = true)]
-        [Alias("Model")]
-        [ValidateRange(-1, 1)]
-        public string AIModel { get; set; }  
-
-        [Parameter(Mandatory = true)]
         [Alias("Rate")]
         [ValidateRange(0, 1)]
-        public decimal AIRating { get; set; }    
+        public decimal Rating { get; set; } 
 
         [Parameter(Mandatory = true)]
-        [Alias("API")]
-        public string APIKey { get; set; }   
+        [Alias("Result")]
+        public AIResultCondition resultCondition { get; set; } 
 
-        [Parameter(Mandatory = false)]
-        [Alias("Bypass")]
-        public SwitchParameter ContinueOnError { get; set; } 
+        [Parameter(Mandatory = true)]
+        public aISettings AIConfiguration { get; set; }
 
         protected override void EndProcessing()
         {
             var condition = new Condition
             {
                 Property = Property,
-                AISettings = new aISettings
-                {
-                    resultCondition = AIResultCondition,
-                    Temperature = AITemperature,
-                    Rating = AIRating,
-                    APIKey = APIKey,
-                    ContinueOnError = ContinueOnError,
-                    Model = AIModel
-                }
-
+                AISettings = AIConfiguration
             };
+
+            // Append the Rating and the Result Condition to the AIConfiguration
+            condition.AISettings.Rating = Rating;
+            condition.AISettings.resultCondition = resultCondition;
 
             WriteObject(condition);
         }
