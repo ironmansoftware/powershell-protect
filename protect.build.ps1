@@ -10,14 +10,14 @@ task Build {
     & "$PSScriptRoot\nuget.exe" restore
 
     $path = .\vswhere -version "[17.0,18.0)" -requires Microsoft.Component.MSBuild -find MSBuild\Current\Bin\MSBuild.exe | Select-Object -First 1
-    & $path .\AmsiProvider.sln /p:Configuration=Release /p:Platform=x64
+    & $path .\AmsiProvider.sln /p:Configuration=Release /p:Platform=x64 /p:OutputPath="$PSScriptRoot\Engine\bin\Release\net462\x64\"
 
     New-Item -Path "$Output\x64" -ItemType Directory
     Copy-Item "$PSScriptRoot\Engine\bin\Release\net462\x64\Engine.dll" "$Output\x64"
     Copy-Item "$PSScriptRoot\x64\Release\AmsiProvider.dll" "$Output\x64"
     Copy-Item "$PSScriptRoot\Engine\bin\Release\net462\*.dll" "$Output"
 
-    & $path .\AmsiProvider.sln /p:Configuration=Release /p:Platform=x86
+    & $path .\AmsiProvider.sln /p:Configuration=Release /p:Platform=x86 /p:OutputPath="$PSScriptRoot\Engine\bin\Release\net462\x86\"
 
     New-Item -Path "$Output\x86" -ItemType Directory
     Copy-Item "$PSScriptRoot\Engine\bin\Release\net462\x86\Engine.dll" "$Output\x86"

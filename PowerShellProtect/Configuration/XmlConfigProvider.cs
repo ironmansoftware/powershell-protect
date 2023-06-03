@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+using System.Management.Automation;
+using System.Diagnostics;
 
 namespace Engine.Configuration
 {
@@ -32,6 +34,9 @@ namespace Engine.Configuration
 
         private void ReadConfig()
         {
+                        
+            System.Diagnostics.Debugger.Launch();
+
             try
             {
                 if (_fileInfo.Exists)
