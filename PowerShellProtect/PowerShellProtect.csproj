@@ -13,4 +13,28 @@
     <PackageReference Include="OpenAI" Version="1.7.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.Security.ApplicationId.PolicyManagement.PolicyEngineApi.Interop">
+      <HintPath>AppLocker\Resources\Microsoft.Security.ApplicationId.PolicyManagement.PolicyEngineApi.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Security.ApplicationId.PolicyManagement.PolicyManager">
+      <HintPath>AppLocker\Resources\Microsoft.Security.ApplicationId.PolicyManagement.PolicyManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel">
+      <HintPath>AppLocker\Resources\Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AppLocker\Resources\Microsoft.Security.ApplicationId.PolicyManagement.PolicyEngineApi.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="AppLocker\Resources\Microsoft.Security.ApplicationId.PolicyManagement.PolicyManager.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="AppLocker\Resources\Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
