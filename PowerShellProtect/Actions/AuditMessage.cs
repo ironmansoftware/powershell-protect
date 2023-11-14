@@ -20,5 +20,18 @@ namespace Engine
         {
             return ApplicationName;
         }
+
+        public AuditMessage DeepCopy()
+        {
+            AuditMessage other = (AuditMessage)this.MemberwiseClone();
+            other.Script = String.Copy(Script);
+            other.ContentPath = String.Copy(ContentPath);
+            other.ApplicationName = String.Copy(ApplicationName);
+            other.UserName = String.Copy(UserName);
+            other.ComputerName = String.Copy(ComputerName);
+            other.DomainName = String.Copy(DomainName);
+            other.Rule = String.Copy(Rule);
+            return other;
+        }
     }
 }
