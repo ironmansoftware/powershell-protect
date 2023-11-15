@@ -24,13 +24,13 @@ namespace Engine
         public AuditMessage DeepCopy()
         {
             AuditMessage other = (AuditMessage)this.MemberwiseClone();
-            other.Script = String.Copy(Script);
-            other.ContentPath = String.Copy(ContentPath);
-            other.ApplicationName = String.Copy(ApplicationName);
-            other.UserName = String.Copy(UserName);
-            other.ComputerName = String.Copy(ComputerName);
-            other.DomainName = String.Copy(DomainName);
-            other.Rule = String.Copy(Rule);
+            if (!String.IsNullOrEmpty(Script)) other.Script = String.Copy(Script);
+            if (!String.IsNullOrEmpty(ContentPath)) other.ContentPath = String.Copy(ContentPath);
+            if (!String.IsNullOrEmpty(ApplicationName)) other.ApplicationName = String.Copy(ApplicationName);
+            if (!String.IsNullOrEmpty(UserName)) other.UserName = String.Copy(UserName);
+            if (!String.IsNullOrEmpty(ComputerName)) other.ComputerName = String.Copy(ComputerName);
+            if (!String.IsNullOrEmpty(DomainName)) other.DomainName = String.Copy(DomainName);
+            if (!String.IsNullOrEmpty(Rule)) other.Rule = String.Copy(Rule);
             return other;
         }
     }
