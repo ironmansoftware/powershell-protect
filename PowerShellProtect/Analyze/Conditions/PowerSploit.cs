@@ -15,6 +15,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public bool Analyze(ScriptContext context, Condition condition)
         {
+            if (context?.Script == null) return false;
             var commands = new[]
             {
                 "Add-NetUser",

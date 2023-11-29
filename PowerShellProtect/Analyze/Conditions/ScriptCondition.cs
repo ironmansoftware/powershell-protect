@@ -10,6 +10,7 @@ namespace Engine.Analyze.Conditions
 
         public override string GetValue(ScriptContext context)
         {
+            if (context?.Script == null) return "";
             return context.Script;
         }
     }
