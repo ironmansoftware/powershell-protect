@@ -134,6 +134,7 @@ namespace Engine
 
                 if (match)
                 {
+                    String assemblyNames = String.Join("; ", ((AssemblyCondition)_conditions["assembly"]).GetValue(scriptContext));
                     foreach (var actionRef in rule.Actions)
                     {
                         var action = configuration.Actions.FirstOrDefault(m => m.Name.Equals(actionRef.Name, System.StringComparison.OrdinalIgnoreCase));
@@ -150,6 +151,7 @@ namespace Engine
                         {
                             ApplicationName = scriptContext.ApplicationName,
                             Rule = rule.Name,
+                            AssemblyName = assemblyNames,
                             ContentPath = scriptContext.ContentName,
                             Script = scriptContext.Script,
                             ComputerName = Environment.MachineName,

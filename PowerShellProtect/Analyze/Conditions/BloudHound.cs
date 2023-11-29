@@ -14,6 +14,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public bool Analyze(ScriptContext context, Condition condition)
         {
+            if (context?.Script == null) return false;
             var script = context.Script.ToLower();
 
             return script.Contains("assemblyloader") && script.Contains("invokesharphound");
