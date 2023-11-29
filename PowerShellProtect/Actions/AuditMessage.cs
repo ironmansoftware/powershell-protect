@@ -10,6 +10,7 @@ namespace Engine
         public string Script { get; set; }
         public string ContentPath { get; set; }
         public string ApplicationName { get; set; }
+        public string AssemblyName { get; set; }
         public string UserName { get; set; }
         public string ComputerName { get; set; }
         public bool Administrator { get; set; }
@@ -27,6 +28,7 @@ namespace Engine
             if (!String.IsNullOrEmpty(Script)) other.Script = String.Copy(Script);
             if (!String.IsNullOrEmpty(ContentPath)) other.ContentPath = String.Copy(ContentPath);
             if (!String.IsNullOrEmpty(ApplicationName)) other.ApplicationName = String.Copy(ApplicationName);
+            if (!String.IsNullOrEmpty(AssemblyName)) other.AssemblyName = String.Copy(AssemblyName);
             if (!String.IsNullOrEmpty(UserName)) other.UserName = String.Copy(UserName);
             if (!String.IsNullOrEmpty(ComputerName)) other.ComputerName = String.Copy(ComputerName);
             if (!String.IsNullOrEmpty(DomainName)) other.DomainName = String.Copy(DomainName);
