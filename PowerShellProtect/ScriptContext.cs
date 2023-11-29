@@ -24,7 +24,7 @@ namespace Engine
         {
             get
             {
-                if (Script != null && _ast == null)
+                if (_ast == null)
                 {
                     var ast = Parser.ParseInput(Script, out Token[] tokens, out ParseError[] errors);
                     if (errors.Any()) return null;
@@ -42,7 +42,7 @@ namespace Engine
         {
             get
             {
-                if (Ast != null && _commands == null)
+                if (_commands == null)
                 {
                     _commands = Ast.FindAll(x => x is CommandAst, true).Cast<CommandAst>().Select(m => m.GetCommandName()).Where(m => m != null).ToList();
                 }
@@ -56,7 +56,7 @@ namespace Engine
         {
             get
             {
-                if (Ast != null && _variables == null)
+                if (_variables == null)
                 {
                     _variables = Ast.FindAll(x => x is VariableExpressionAst, true).Cast<VariableExpressionAst>().Select(m => m.VariablePath.UserPath).ToList();
                 }
@@ -70,7 +70,7 @@ namespace Engine
         {
             get
             {
-                if (Ast != null && _members == null)
+                if (_members == null)
                 {
                     _members = Ast.FindAll(x => x is MemberExpressionAst, true).Cast<MemberExpressionAst>().Select(m => m.Member.ToString()).ToList();
                 }
@@ -84,7 +84,7 @@ namespace Engine
         {
             get
             {
-                if (Ast != null && _strings == null)
+                if (_strings == null)
                 {
                     _strings = Ast.FindAll(x => x is StringConstantExpressionAst, true).Cast<StringConstantExpressionAst>().Select(m => m.Value).ToList();
                     _strings = _strings.Concat(Ast.FindAll(x => x is ExpandableStringExpressionAst, true).Cast<ExpandableStringExpressionAst>().Select(m => m.Value)).ToList();
