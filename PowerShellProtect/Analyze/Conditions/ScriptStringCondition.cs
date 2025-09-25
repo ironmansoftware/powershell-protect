@@ -11,6 +11,7 @@ namespace Engine.Analyze.Conditions
 
         public override List<string> GetValue(ScriptContext context)
         {
+            if (context?.Strings == null) return new List<string>();
             return context.Strings;
         }
     }

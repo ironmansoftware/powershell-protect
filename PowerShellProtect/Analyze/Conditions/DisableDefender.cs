@@ -12,6 +12,7 @@ namespace PowerShellProtect.Analyze.Conditions
 
         public bool Analyze(ScriptContext context, Condition condition)
         {
+            if (context?.Script == null) return false;
             if (context?.Commands == null) return false;
             return context.Commands.Any(m => m.Equals("Set-MpPreference", System.StringComparison.OrdinalIgnoreCase)) && context.Script.ToLower().Contains("DisableRea".ToLower());
         }
