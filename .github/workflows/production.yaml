@@ -17,4 +17,4 @@ jobs:
           run: Invoke-Build -Task Publish
           shell: powershell
           env:
-            PowerShellGalleryKey: ${{ secrets.POWERSHELLGALLERYKEY }}
+            PowerShellGalleryKey: ${{ secrets.IMS_PSGALLERY }}
