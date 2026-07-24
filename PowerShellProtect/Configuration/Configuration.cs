@@ -17,6 +17,7 @@ namespace Engine.Configuration
         public string Provider { get; set; }
         public string Model { get; set; }
         public string ApiKey { get; set; }
+        public string CustomInstructions { get; set; }
         public int TimeoutSeconds { get; set; } = 30;
     }
 

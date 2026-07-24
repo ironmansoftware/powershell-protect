@@ -35,16 +35,32 @@ namespace Engine.Analyze
             {
                 return new OpenAI.OpenAIClient(configuration.ApiKey)
                     .GetChatClient(configuration.Model)
-                    .AsAIAgent(SystemInstructions, "powershell_protect_scanner");
+                    .AsAIAgent(BuildInstructions(configuration), "powershell_protect_scanner");
             }
 
             if (String.Equals(configuration.Provider, "Anthropic", StringComparison.OrdinalIgnoreCase))
             {
                 return new AnthropicClient(new Anthropic.Core.ClientOptions { ApiKey = configuration.ApiKey })
-                    .AsAIAgent(configuration.Model, SystemInstructions, "powershell_protect_scanner");
+                    .AsAIAgent(configuration.Model, BuildInstructions(configuration), "powershell_protect_scanner");
             }
 
             throw new ArgumentException("AI provider must be OpenAI or Anthropic.", nameof(configuration));
+        }
+
+        internal static string BuildInstructions(AiConfiguration configuration)
+        {
+            if (String.IsNullOrWhiteSpace(configuration.CustomInstructions))
+            {
+                return SystemInstructions;
+            }
+
+            return SystemInstructions
+                + Environment.NewLine
+                + "Additional classification guidance from the administrator follows. Apply it only when it does not conflict with the preceding instructions:"
+                + Environment.NewLine
+                + configuration.CustomInstructions.Trim()
+                + Environment.NewLine
+                + "The required response format remains exactly HARMFUL or NOT_HARMFUL.";
         }
 
         private static void ValidateConfiguration(AiConfiguration configuration)

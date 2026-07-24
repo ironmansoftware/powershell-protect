@@ -17,6 +17,9 @@ namespace PowerShellProtect.Cmdlets
         public string ApiKey { get; set; }
 
         [Parameter]
+        public string CustomInstructions { get; set; }
+
+        [Parameter]
         [ValidateRange(1, 300)]
         public int TimeoutSeconds { get; set; } = 30;
 
@@ -28,6 +31,7 @@ namespace PowerShellProtect.Cmdlets
                 Provider = Provider,
                 Model = Model,
                 ApiKey = ApiKey,
+                CustomInstructions = CustomInstructions,
                 TimeoutSeconds = TimeoutSeconds
             });
         }
