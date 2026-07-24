@@ -72,7 +72,7 @@
     FunctionsToExport = @('Install-PowerShellProtect', 'Uninstall-PowerShellProtect')
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport   = @('Get-PSPConfiguration', 'Set-PSPConfiguration', 'Test-PSPConfiguration', 'New-PSPRule', 'New-PSPCondition', 'New-PSPAction', 'New-PSPConfiguration', 'Save-PSPConfiguration')
+    CmdletsToExport   = @('Get-PSPConfiguration', 'Set-PSPConfiguration', 'Test-PSPConfiguration', 'New-PSPRule', 'New-PSPCondition', 'New-PSPAction', 'New-PSPAIConfiguration', 'New-PSPConfiguration', 'Save-PSPConfiguration')
 
     # Variables to export from this module
     VariablesToExport = @()

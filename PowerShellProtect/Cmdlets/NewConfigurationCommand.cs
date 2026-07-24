@@ -22,6 +22,9 @@ namespace PowerShellProtect.Cmdlets
         [Parameter]
         public string[] DisabledBuiltInConditions { get; set; } = new string[0];
 
+        [Parameter]
+        public AiConfiguration AI { get; set; }
+
         protected override void EndProcessing()
         {
             var configuration = new Configuration
@@ -33,7 +36,8 @@ namespace PowerShellProtect.Cmdlets
                     DisabledConditions = DisabledBuiltInConditions,
                     Actions = Action?.Select(m => new ActionRef { Name = m.Name }).ToList(),
                     Enabled = !DisableBuiltInActions.IsPresent
-                }
+                },
+                AI = AI ?? new AiConfiguration()
             };
 
             WriteObject(configuration);

@@ -1,5 +1,6 @@
 ﻿using Engine.Configuration;
 using NSubstitute;
+using Engine.Analyze;
 using System.Collections.Generic;
 using Xunit;
 
@@ -7,6 +8,33 @@ namespace Engine.Tests.Analyze
 {
     public class AnalyzerTest
     {
+        [Fact]
+        public void ShouldBlockWhenAiScannerMarksScriptAsHarmful()
+        {
+            var configProvider = Substitute.For<IConfigProvider>();
+            configProvider.GetConfiguration().Returns(new Engine.Configuration.Configuration
+            {
+                AI = new AiConfiguration
+                {
+                    Enabled = true,
+                    Provider = "OpenAI",
+                    Model = "test-model",
+                    ApiKey = "test-key"
+                }
+            });
+
+            var scanner = Substitute.For<IAiScriptScanner>();
+            scanner.Scan(Arg.Any<ScriptContext>(), Arg.Any<AiConfiguration>()).Returns(AiScanResult.Harmful);
+
+            var analyzer = new Analyzer(
+                new ICondition[0],
+                new Config(new[] { configProvider }),
+                new IAction[0],
+                scanner);
+
+            Assert.Equal(AnalyzeResult.AdminBlock, analyzer.Analyze(new ScriptContext { Script = "Get-Process" }));
+        }
+
         private Analyzer analyzer;
 
         [Fact]

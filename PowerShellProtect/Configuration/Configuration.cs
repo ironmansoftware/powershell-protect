@@ -8,6 +8,16 @@ namespace Engine.Configuration
         public List<Rule> Rules { get; set; } = new List<Rule>();
         public List<Action> Actions { get; set; } = new List<Action>();
         public BuiltIn BuiltIn { get; set; } = new BuiltIn();
+        public AiConfiguration AI { get; set; } = new AiConfiguration();
+    }
+
+    public class AiConfiguration
+    {
+        public bool Enabled { get; set; }
+        public string Provider { get; set; }
+        public string Model { get; set; }
+        public string ApiKey { get; set; }
+        public int TimeoutSeconds { get; set; } = 30;
     }
 
     public class BuiltIn

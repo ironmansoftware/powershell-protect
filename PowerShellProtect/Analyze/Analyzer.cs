@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Engine.Audit;
 using Engine.Actions;
+using Engine.Analyze;
 using Engine.Analyze.Conditions;
 using PowerShellProtect.Analyze.Conditions;
 
@@ -15,9 +16,11 @@ namespace Engine
         internal readonly Config _config;
         private readonly IDictionary<string, IAction> _actions;
         private readonly List<ICondition> _builtInConditions;
+        private readonly IAiScriptScanner _aiScriptScanner;
         public Analyzer()
         {
             _config = new Config();
+            _aiScriptScanner = new AgentScriptScanner();
 
             _actions = new List<IAction>
             {
@@ -69,17 +72,34 @@ namespace Engine
             }
         }
 
-        internal Analyzer(IEnumerable<ICondition> conditions, Config config, IEnumerable<IAction> actions)
+        internal Analyzer(IEnumerable<ICondition> conditions, Config config, IEnumerable<IAction> actions, IAiScriptScanner aiScriptScanner = null)
         {
             _conditions = conditions.ToDictionary(m => m.Name.ToLower(), m => m);
             _config = config;
             _actions = actions.ToDictionary(m => m.Type.ToLower(), m => m);
             _builtInConditions = new List<ICondition>();
+            _aiScriptScanner = aiScriptScanner ?? new AgentScriptScanner();
         }
 
         public AnalyzeResult Analyze(ScriptContext scriptContext)
         {
             var configuration = _config.GetConfiguration();
+
+            if (configuration.AI?.Enabled == true)
+            {
+                try
+                {
+                    if (_aiScriptScanner.Scan(scriptContext, configuration.AI) == AiScanResult.Harmful)
+                    {
+                        Log.LogError($"PowerShell Protect blocked a script because the AI scanner ({configuration.AI.Provider}, {configuration.AI.Model}) classified it as harmful.", 101);
+                        return AnalyzeResult.AdminBlock;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError($"The AI scanner ({configuration.AI.Provider}, {configuration.AI.Model}) failed: {ex.Message}");
+                }
+            }
 
             var rules = configuration.Rules;
 
