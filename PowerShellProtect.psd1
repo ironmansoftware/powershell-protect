@@ -12,7 +12,7 @@
     RootModule        = 'PowerShellProtect.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '2022.11.0'
+    ModuleVersion     = '2026.2.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
