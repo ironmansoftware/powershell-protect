@@ -9,7 +9,7 @@ task Build {
     Push-Location $PSScriptRoot
     & "$PSScriptRoot\nuget.exe" restore
 
-    $path = .\vswhere -version "[17.0,18.0)" -requires Microsoft.Component.MSBuild -find MSBuild\Current\Bin\MSBuild.exe | Select-Object -First 1
+    $path = .\vswhere -version "[17.0,19.0)" -requires Microsoft.Component.MSBuild -find MSBuild\Current\Bin\MSBuild.exe | Select-Object -First 1
     & $path .\AmsiProvider.sln /p:Configuration=Release /p:Platform=x64
 
     New-Item -Path "$Output\x64" -ItemType Directory
