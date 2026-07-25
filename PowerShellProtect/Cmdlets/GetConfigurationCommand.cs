@@ -1,5 +1,7 @@
-﻿using Engine.Configuration;
+﻿using Engine;
+using Engine.Configuration;
 using System.Management.Automation;
+using System.Linq;
 
 namespace PowerShellProtect.Cmdlets
 {
@@ -9,8 +11,11 @@ namespace PowerShellProtect.Cmdlets
         protected override void BeginProcessing()
         {
             var config = new Config();
+            var configuration = config.GetConfiguration();
 
-            WriteObject(config.GetConfiguration());
+            configuration.BuiltInRules = BuiltInConditionCatalog.GetRules().ToList();
+
+            WriteObject(configuration);
         }
     }
 }

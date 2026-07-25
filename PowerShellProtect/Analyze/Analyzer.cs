@@ -50,21 +50,7 @@ namespace Engine
                 new ScriptStringCondition(),
             }.ToDictionary(m => m.Name.ToLower(), m => m);
 
-            _builtInConditions = new List<ICondition>
-            {
-                new AmsiBypass(),
-                new LoggingBypass(),
-                new DisableDefender(),
-                new PowerSploit(),
-                new AssemblyLoad(),
-                new ReflectionEmit(),
-                new MarshalClass(),
-                new PersistentWmi(),
-                new BloudHound(),
-                new Kerberoasting(),
-                new InvokeExpression(),
-                new Log4J()
-            };
+            _builtInConditions = BuiltInConditionCatalog.Create().ToList();
 
             foreach (var builtInCondition in _builtInConditions)
             {

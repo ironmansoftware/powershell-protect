@@ -35,6 +35,16 @@ Install-Module PowerShellProtect
 Install-PowerShellProtect
 ```
 
+## Inspect built-in rules
+
+`Get-PSPConfiguration` includes the built-in rules that ship with the module. The
+`BuiltInRules` property lists each rule's name and description; it is informational
+only and is not written into exported configuration XML.
+
+```powershell
+(Get-PSPConfiguration).BuiltInRules | Format-Table Name, Description -Wrap
+```
+
 ## Resources
 
 - [License](./LICENSE)
