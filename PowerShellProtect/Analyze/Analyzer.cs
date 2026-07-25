@@ -42,6 +42,7 @@ namespace Engine
                 new DomainControllerCondition(),
                 new ComputerNameCondition(),
                 new DomainCondition(),
+                new LanguageModeCondition(),
                 new CommandCondition(),
                 new ScriptCondition(),
                 new ContentPathCondition(),

@@ -35,6 +35,19 @@ Install-Module PowerShellProtect
 Install-PowerShellProtect
 ```
 
+## Enforce Constrained Language Mode
+
+Use a `languagemode` condition with a blocking action to prevent scripts from running unless the submitting PowerShell runspace is in Constrained Language Mode:
+
+```powershell
+$condition = New-PSPCondition -Property languagemode -NotEquals -Value ConstrainedLanguage
+$action = New-PSPAction -Block
+$rule = New-PSPRule -Name 'Require Constrained Language Mode' -Condition $condition -Action $action
+$configuration = New-PSPConfiguration -Rule $rule -Action $action
+```
+
+This rule observes the mode of the runspace that AMSI is currently scanning. It is a guardrail, not a replacement for enforcing Constrained Language Mode with WDAC, AppLocker, or a locked-down session configuration: code running with Full Language capabilities can attempt to disable AMSI or change its own session state before a later scan.
+
 ## Resources
 
 - [License](./LICENSE)

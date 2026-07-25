@@ -10,7 +10,7 @@ namespace PowerShellProtect.Cmdlets
     public class NewConditionCommand : PSCmdlet
     {
         [Parameter(Mandatory = true)]
-        [ValidateSet("admin", "domaincontroller", "computername", "domain", "ApplicationName", "command", "script", "contentpath", "variable", "member", "string", "applicationHash", "assembly", "assemblyHash")]
+        [ValidateSet("admin", "domaincontroller", "computername", "domain", "languagemode", "ApplicationName", "command", "script", "contentpath", "variable", "member", "string", "applicationHash", "assembly", "assemblyHash")]
         public string Property { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = "NotEquals")]

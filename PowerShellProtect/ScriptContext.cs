@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation.Language;
+using System.Management.Automation.Runspaces;
 
 namespace Engine
 {
@@ -11,11 +12,17 @@ namespace Engine
         public string Script { get; set; }
         public string ContentName { get; set; }
         public string ApplicationName { get; set; }
+        /// <summary>
+        /// The language mode of the runspace that submitted the script to AMSI.
+        /// This is null when the script was not submitted from a PowerShell runspace.
+        /// </summary>
+        public string LanguageMode { get; set; }
         public Guid Id { get; set; } = Guid.NewGuid();
         public static ConcurrentDictionary<DateTime, ScriptContext> History { get; } = new ConcurrentDictionary<DateTime, ScriptContext>();
 
         public ScriptContext()
         {
+            LanguageMode = Runspace.DefaultRunspace?.SessionStateProxy?.LanguageMode.ToString();
             History.TryAdd(DateTime.Now, this);
         }
 
