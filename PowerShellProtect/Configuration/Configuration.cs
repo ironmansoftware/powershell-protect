@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Engine.Configuration
 {
@@ -9,6 +10,15 @@ namespace Engine.Configuration
         public List<Action> Actions { get; set; } = new List<Action>();
         public BuiltIn BuiltIn { get; set; } = new BuiltIn();
         public AiConfiguration AI { get; set; } = new AiConfiguration();
+
+        [XmlIgnore]
+        public List<BuiltInRule> BuiltInRules { get; set; } = new List<BuiltInRule>();
+    }
+
+    public class BuiltInRule
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 
     public class AiConfiguration
